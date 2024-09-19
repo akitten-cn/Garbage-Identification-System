@@ -1,0 +1,143 @@
+/* 页脚 */
+footer {
+    color: #888;
+    /*margin-top: 15px;*/
+    text-align: center;
+    padding: 10px;
+}
+
+
+.btn {
+    font-size: 12px;
+    padding: 3px 5px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 1px solid #555555;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+.alert {
+    position: relative;
+    padding: 7px;
+    margin: 7px 0;
+    border: 1px solid transparent;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+    border-radius: 5px;
+}
+
+.inline-form {
+    display: inline;
+}
+
+
+.ti-widget {
+    font-style: normal;
+}
+
+.line-legend {
+    list-style: none;
+    padding: 0px;
+}
+
+.line-legend li {
+    display: block;
+    padding-left: 30px;
+    position: relative;
+    margin-bottom: 4px;
+    border-radius: 5px;
+    padding: 2px 8px 2px 28px;
+    font-size: 14px;
+    cursor: default;
+    -webkit-transition: background-color 200ms ease-in-out;
+    -moz-transition: background-color 200ms ease-in-out;
+    -o-transition: background-color 200ms ease-in-out;
+    transition: background-color 200ms ease-in-out;
+}
+
+.line-legend li:hover {
+    background-color: #fafafa;
+}
+
+/**
+ * Start by hiding the checkboxes
+ */
+.checkbox-five > input[type=checkbox] {
+    visibility: hidden;
+}
+
+/**
+ * Create the box for the checkbox
+ */
+.checkbox-five label {
+    cursor: pointer;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 0;
+    left: 0;
+    border: 1px solid #ddd;
+}
+
+/**
+ * Display the tick inside the checkbox
+ */
+.checkbox-five label:after {
+    opacity: 0.2;
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 5px;
+    background: transparent;
+    top: 8px;
+    left: 7px;
+    border: 3px solid #333;
+    border-top: none;
+    border-right: none;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+/**
+ * Create the hover event of the tick
+ */
+.checkbox-five label:hover::after {
+    opacity: 0.5;
+}
+
+/**
+ * Create the checkbox state for the tick
+ */
+.checkbox-five input[type=checkbox]:checked + label:after {
+    opacity: 1;
+}
+
+th,td{
+        text-align: center;
+    max-width: 200px; /* 设置最大宽度为 200px */
+  overflow: hidden; /* 溢出部分隐藏 */
+  text-overflow: ellipsis; /* 超出部分显示省略号 */
+  white-space: nowrap; /* 禁止换行 */
+}
+.col-sm-6{
+    word-wrap: break-word;
+}
+
+#chart-container {
+  position: relative;
+  height: 50vh;
+  overflow: hidden;
+}

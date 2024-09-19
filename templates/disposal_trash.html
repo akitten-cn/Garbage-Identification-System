@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}
+    <a class="navbar-brand" href="#"> 垃圾投放 </a>
+{% endblock %}
+{% block write %}
+{% endblock %}
+
+{% block content %}
+        <div class="manipulation">
+            <div class="picture_l" style="padding-top: 20px;">
+                <img src="../static/image/loading01.png" alt="等待上传" style="height: 400px;width: 550px;margin: 0 auto;display: block; " id="img_loaded01"/>
+            </div>
+            <div class="d-grid" style="margin: 50px 30px;padding: 0 0 20px 0;">
+                <div style="text-align: center;">
+                    <input type="file" name="load_img01" id="load_img01" class="image_load"  accept="image/jpeg, image/png"/>
+                    <label for="load_img01" class="btn btn-simple btn-warning btn-icon edit" style="margin-right: 25px;">选择图片</label>
+                    <button type="button" class="btn btn-simple btn-warning btn-icon edit" onclick="detect()" style="margin-left: 25px;">开始检测</button>
+                </div>
+            </div>
+        </div>
+        <!-- Loading js -->
+        <script src="../static/js/Trash_disposal.js"></script>
+
+{% endblock %}

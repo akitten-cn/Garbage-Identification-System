@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+    <a class="navbar-brand" href="#"> 垃圾管理系统 </a>
+{% endblock %}
+{% block write %}
+{% endblock %}
+
+{% block content %}
+    {% if current_user.is_authenticated %}
+        <div  class="col-md-12">
+        <div style="text-align:center;" >
+                <h2 style="margin:160px 0 60px;font-family: cursive;font-size:-webkit-xxx-large;">
+                    欢迎使用垃圾管理系统
+                </h2>
+
+            </div>
+        </div>
+
+
+    {% else %}
+        <div  class="col-md-12">
+        <div style="text-align:center;" >
+                <h2 style="margin:60px 0 60px;font-family: cursive;font-size:-webkit-xxx-large;">
+                    欢迎使用垃圾管理系统
+                </h2>
+                <h2 style="margin:60px 0 60px;font-family: cursive;">
+                    请先登录或注册
+                </h2>
+            </div>
+        </div>
+
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block title %}
+    <a class="navbar-brand" href="#"> 旧物回收 </a>
+{% endblock %}
+{% block write %}
+    {% if current_user.has_role('User')  %}
+    <li>
+    <a  method="post" href="{{ url_for('recycling_add') }}" class="btn btn-simple btn-danger btn-icon remove">
+        添加旧物
+    </a>
+    </li>
+    {% endif %}
+{% endblock %}
+{% block content %}
+{# 使用 length 过滤器获取 staffs 变量的长度 #}
+    {% if current_user.has_role('Root') or current_user.has_role('Admin') %}
+    <div class="content">
+        {% if recyclings == [] %}
+            <h4 class="title">暂无用户添加旧物</h4>
+        {% else %}
+            <h4 class="title">旧物回收</h4>
+        {% endif %}
+            <div class="material-datatables">
+                <table id="datatables" class="table table-striped table-no-bordered table-hover"
+                       style="width:100%;cellspacing:0">
+                    <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>旧物</th>
+                        <th>旧物图片</th>
+                        <th>旧物类别</th>
+                        <th>状态</th>
+                        <th class="disabled-sorting">操作</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for recycling in recyclings %}
+                            <tr>
+                                <td>{{ recycling.username }}</td>
+                                <td>{{ recycling.name }}</td>
+                                <td><img src="/static/image/recycling/{{ recycling.image_path }}"  style="height: 100px;width: 150px;margin: 0 auto;display: block; " id="img_loaded01"/></td>
+                                <td>{{ recycling.classification }}</td>
+                                {% if recycling.recycling == 0 %}
+                                    <td>待回收</td>
+                                    <td>
+                                        <button id="{{ recycling.id }}_huishou"class="btn btn-simple btn-info btn-icon like">回收</button>
+                                    </td>
+                                {% elif recycling.recycling == 1 %}
+                                    <td>已回收</td>
+                                    <td>已回收</td>
+                                {% endif %}
+
+                            <script>
+                            document.getElementById('{{ recycling.id }}_huishou').addEventListener('click', function() {
+                              // 使用 prompt 弹窗接收用户输入的数量
+                              let userInput = prompt('请输入回收验证码:');
+
+                              // 如果用户点击取消或者未输入数量，直接返回
+                              if (userInput === null || userInput === "") {
+                                return;
+                              }
+
+                              // 转换用户输入的数量为整数
+                              let quantity = parseInt(userInput);
+                              if (isNaN(quantity)) {
+                                alert('请输入有效的数字！');
+                                return;
+                              }
+                                // 提交数据给后端处理
+                                fetch('/recycling_huishou', {
+                                  method: 'POST',
+                                  headers: {
+                                    'Content-Type': 'application/json'
+                                  },
+                                  body: JSON.stringify({ quantity: quantity,
+                                                        id:{{recycling.id}}})
+                                }).then(response => {
+                              // 处理后端返回的响应
+                                  if (response.ok) {
+                                    return response.json(); // 解析 JSON 数据
+                                  } else if (response.status === 400) {  // 检查状态码是否为 400
+                                    throw new Error('回收验证码错误');  // 抛出错误，进入 catch 块
+                                  } else {
+                                    alert('提交失败，请重试！');
+                                  }
+                                }).then(data => {
+                                // 处理后端返回的 JSON 数据
+                                alert('回收成功！');
+                                }).catch(error => {
+                                  console.error('Error:', error.message);
+                                  alert(error.message);  // 显示错误信息给用户
+                                });
+
+                            });
+                        </script>
+
+                            </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </div>
+    {% elif  current_user.has_role('User') %}
+       <div class="content">
+        {% if recyclings == [] %}
+            <h4 class="title">暂无用户添加旧物</h4>
+        {% else %}
+            <h4 class="title">旧物回收</h4>
+        {% endif %}
+            <div class="material-datatables">
+                <table id="datatables" class="table table-striped table-no-bordered table-hover"
+                       style="width:100%;cellspacing:0">
+                    <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>旧物</th>
+                        <th>旧物图片</th>
+                        <th>旧物类别</th>
+                        <th>回收验证码</th>
+                        <th>状态</th>
+                        <th class="disabled-sorting">操作</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for recycling in recyclings %}
+                            <tr>
+                                <td>{{ recycling.username }}</td>
+                                <td>{{ recycling.name }}</td>
+                                <td><img src="/static/image/recycling/{{ recycling.image_path }}"  style="height: 100px;width: 150px;margin: 0 auto;display: block; " id="img_loaded01"/></td>
+                                <td>{{ recycling.classification }}</td>
+                                <td>{{ recycling.pickup_code }}</td>
+                                {% if recycling.recycling == 0 %}
+                                    <td>待回收</td>
+                                    <td>
+                                        <form  method="post" action="{{ url_for('recycling_del',id=recycling.id) }}">
+
+                                            <input name="delete" type="submit" value="删除" onclick="return confirm('确认删除此条旧物？')" class="btn btn-simple btn-danger btn-icon remove">
+                                        </form>
+                                    </td>
+                                {% elif recycling.recycling == 1 %}
+                                    <td>已回收</td>
+                                    <td>已回收</td>
+                                {% endif %}
+                            </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </div>
+    {% endif %}
+{% endblock %}

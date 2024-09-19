@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}
+    <a class="navbar-brand" href="#"> 添加旧物 </a>
+{% endblock %}
+{% block content %}
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<form id="allInputsFormValidation" class="form-horizontal"  method="post" >
+						<div class="content">
+							<h4 class="title">添加旧物</h4>
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">旧物名称</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="name" type="text" name="name"
+                                               required="required" aria-required="true" autocomplete="off" >
+                                    </div>
+                                </div>
+							</fieldset>
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">旧物图片</label>
+                                    <div class="col-sm-6">
+
+                                        <img src="/static/image/loading01.png"  style="height: 400px;width: 550px;margin: 0 auto;display: block; " id="img_loaded01"/>
+                                        <div class="manipulation">
+                                            <div class="d-grid" style="margin: 50px 0px;">
+                                                <div style="text-align: center;">
+                                                    <input type="file" name="up_recycling" id="up_recycling" class="image_load" accept="image/jpeg, image/png"/>
+                                                    <label for="up_recycling" class="btn btn-simple btn-warning btn-icon edit">选择图片</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        <!-- Loading js -->
+                                        <script src="../static/js/recycling_up.js"></script>
+                                </div>
+							</fieldset>
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">旧物类别</label>
+                                    <div class="col-sm-6">
+                                        <select id="classification" class="form-control" name="classification" >
+                                            <option value="电子产品">电子产品</option>
+                                            <option value="生活用品">生活用品</option>
+                                            <option value="洗漱用品">洗漱用品</option>
+                                        </select>
+                                    </div>
+                                </div>
+							</fieldset>
+						</div>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> </label>
+                                <div class="col-sm-6" style="text-align: center;">
+                                    <button type="button" class="btn btn-simple btn-warning btn-icon edit" onclick="recycling_up()" style="margin-left: 25px;">提交</button>
+                                </div>
+                            </div>
+                        </fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,6 @@
+train: E:\PYCode\DatasetZip\VOCdevkit\VOC2007\train
+val: E:\PYCode\DatasetZip\VOCdevkit\VOC2007\val
+
+nc: 44
+
+names: ['Book_paper', 'metalic_kitchenware', 'cutting_board', 'Soiled_plastic', 'chopsticks', 'chinaware', 'Plug_wire', 'wash_supplies', 'plastic_toy', 'shoes', 'pericarp', 'glassware','plush_toy', 'Soiled_paper', 'plastic_vessel', 'carton','flowerpot', 'bag', 'metalware', 'dry_cell', 'sauce_bottle', 'vegetable_leaf', 'pot', 'cooking_oil','drink_bottle', 'power_bank', 'drink_can', 'toothpick', 'leftover_food', 'Bigbone', 'fishbone', 'trash_can','wine_bottle', 'Metalfoodjar', 'takeout_container', 'butt','old_clothes', 'plastic_hanger', 'pillow', 'Expired_drug', 'Tea_residue', 'ointment', 'eggshell', 'Express_bag']

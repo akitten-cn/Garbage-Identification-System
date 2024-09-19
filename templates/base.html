@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>垃圾管理系统</title>
+{#        <link rel="icon" href="{{ url_for('static',filename='favicon.ico') }}" >#}
+		<link href="{{ url_for('static',filename='bootstrap.min.css') }}" rel="stylesheet">
+		<link href="{{ url_for('static',filename='amaze.css') }}" rel="stylesheet" >
+        <link href="{{ url_for('static',filename='style.css') }}" rel="stylesheet" >
+        <style>
+            .ti-widget,.ti-panel{
+                font-style:normal;
+            }
+        </style>
+        <script type="text/javascript" src="{{ url_for('static',filename='jquery-3.1.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static',filename='Chart.js') }}"></script>
+        <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" ></script>
+        <script> $('input[required="required"]').before('<span style="color:red">*</span>'); </script>
+        <link rel="stylesheet" type="text/css" href="../static/detection_image.css">
+{#        <link href="{{ url_for('static',filename='themify-icons.css') }}" rel="stylesheet" >#}
+
+</head>
+<body>
+    {% for message in get_flashed_messages() %}
+    <script rel="script">
+        //弹出一个对话框
+        alert("{{ message }}");
+    </script>
+{% endfor %}
+{# 获取提示消息并显示 #}
+{% block body %}
+
+    <div class="wrapper" style="height: auto">
+		<div class="sidebar" data-background-color="brown" data-active-color="danger">
+	    <!--
+			Tip 1: you can change the color of the sidebar's background using: data-background-color="white | brown"
+			Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+		-->
+			{% if current_user.is_authenticated %}
+            <div class="logo" style="height: auto">
+                <a href="#" class="simple-text">
+                    垃圾管理系统
+                </a>
+                {% if current_user.has_role('Root') %}
+                    <a href="#" class="simple-text">超级管理员</a>
+                {% elif current_user.has_role('Admin')  %}
+                     <a href="#" class="simple-text">回收员</a>
+                {% elif current_user.has_role('User') %}
+                    <a href="#" class="simple-text">普通用户</a>
+                {% endif %}
+            </div>
+
+            {% else %}
+			<div class="logo">
+                <a href="#" class="simple-text">
+                    请登录系统
+                </a>
+            </div>
+			{% endif %}
+            <div class="sidebar-wrapper" style="height: calc(100vh - 125px);">
+				<ul class="nav">
+                    <li>
+                        <a href="{{ url_for('index') }}">
+                            <i class="ti-panel">&#9818</i>
+                            <p>首页</p>
+                        </a>
+                    </li>
+					{% if current_user.is_authenticated %}
+                        <li>
+							<a href="{{ url_for('Trash_detect') }}">
+								<i class="ti-widget">&#10001</i>
+								<p>垃圾识别</p>
+							</a>
+						</li>
+                        <li>
+							<a href="{{ url_for('Trash_disposal',page=1) }}">
+								<i class="ti-widget">&#10001</i>
+								<p>垃圾投放</p>
+							</a>
+						</li>
+                        <li>
+							<a href="{{ url_for('commodity') }}">
+								<i class="ti-widget">&#10001</i>
+								<p>积分商城</p>
+							</a>
+						</li>
+                        <li>
+							<a href="{{ url_for('popular_science') }}">
+								<i class="ti-widget">&#10001</i>
+								<p>垃圾科普</p>
+							</a>
+						</li>
+                        <li>
+							<a href="{{ url_for('recycling') }}">
+								<i class="ti-widget">&#10001</i>
+								<p>旧物回收</p>
+							</a>
+						</li>
+                        <li>
+							<a href="{{ url_for('community') }}">
+								<i class="ti-widget">&#10001</i>
+								<p>社区</p>
+							</a>
+						</li>
+					{% else %}
+						<li>
+							<a href="{{ url_for('login') }}">
+								<i class="ti-widget">&#9819</i>
+								<p>登录</p>
+							</a>
+						</li>
+						<li>
+							<a href="{{ url_for('logging') }}">
+								<i class="ti-widget">&#9812</i>
+								<p>注册</p>
+							</a>
+						</li>
+					{% endif %}
+					{% if current_user.has_role('Root') %}
+						<li>
+							<a href="{{ url_for('user_role') }}">
+								<i class="ti-widget">&#10001</i>
+								<p>权限管理</p>
+							</a>
+						</li>
+                        <li>
+							<a href="{{ url_for('blacklist') }}">
+								<i class="ti-widget">&#10001</i>
+								<p>不文明管理</p>
+							</a>
+						</li>
+					{% endif %}
+
+				</ul>
+
+            </div>
+        </div>
+
+	<div class="main-panel">
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        {% block title %}
+                        <a class="navbar-brand" href="#"> Data-Table </a>
+                        {% endblock %}
+                    </div>
+					{% if current_user.is_authenticated%}
+					<div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="#" class="btn btn-simple btn-info btn-icon like" data-toggle="dropdown">
+                                    <span id="user_integral">积分{{ current_user.integral }}</span>
+                                </a>
+                            </li>
+                            {% block write %}{% endblock %}
+							<li>
+                                <a href="{{ url_for('logout') }}" class="btn btn-simple btn-info btn-icon like" data-toggle="dropdown">
+                                    登出
+                                </a>
+                            </li>
+						</ul>
+					</div>
+					{% endif %}
+                </div>
+            </nav>
+            {% block div %}
+            <div class="content" style="min-height: calc(100vh - 183px);">
+            {% endblock %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+							{% block content %}
+
+							{% endblock %}
+                                <!-- end content-->
+                            </div>
+                            <!--  end card  -->
+                        </div>
+                        <!-- end col-md-12 -->
+                    </div>
+                </div>
+            </div>
+
+			<footer class="footer">
+                <div class="container-fluid">
+                    <p class="copyright pull-right">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        <a href="/">垃圾管理系统</a>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+{% endblock %}
+{% block login %}{% endblock %}
+</body>
+</html>

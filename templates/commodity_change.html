@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}
+    <a class="navbar-brand" href="#"> 修改商品信息 </a>
+{% endblock %}
+{% block content %}
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<form id="allInputsFormValidation" class="form-horizontal"  method="post" >
+						<div class="content">
+							<h4 class="title">修改商品信息</h4>
+
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">商品名称</label>
+                                    <div class="col-sm-6" style="margin-top: 10px">
+                                        {{commodity.commodity}}
+                                    </div>
+                                </div>
+							</fieldset>
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">可兑换数量</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="weight_name" type="number" name="number"
+                                               required="required" aria-required="true" autocomplete="off" value={{ commodity.number }} >
+                                    </div>
+                                </div>
+							</fieldset>
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">兑换所需积分</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="weight_name" type="number" name="integral"
+                                               required="required" aria-required="true" autocomplete="off" value={{ commodity.integral }}>
+                                    </div>
+                                </div>
+							</fieldset>
+
+
+
+						</div>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> </label>
+                                <div class="col-sm-6" style="text-align: center;">
+                                    <input type="submit" name="submit" class="btn btn-info btn-fill" value="添加">
+                                </div>
+                            </div>
+                        </fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

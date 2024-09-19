@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}
+    <a class="navbar-brand" href="#"> 修改垃圾科普信息 </a>
+{% endblock %}
+{% block content %}
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<form id="allInputsFormValidation" class="form-horizontal"  method="post" >
+						<div class="content">
+							<h4 class="title">修改垃圾科普信息</h4>
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">垃圾名称</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="name" type="text" name="name"
+                                               required="required" aria-required="true" autocomplete="off" value="{{ popular_science.name }}">
+                                    </div>
+                                </div>
+							</fieldset>
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">垃圾类别</label>
+                                    <div class="col-sm-6">
+                                        <select id="shelfSelect" class="form-control" name="classification" >
+                                            <option value="{{popular_science.classification}}">{{popular_science.classification}}</option>
+                                            {% if popular_science.classification != '可回收垃圾' %}
+                                            <option value="可回收垃圾">可回收垃圾</option>
+                                            {% endif %}
+                                            {% if popular_science.classification != '不可回收垃圾' %}
+                                            <option value="不可回收垃圾">不可回收垃圾</option>
+                                            {% endif %}
+                                            {% if popular_science.classification != '有害垃圾' %}
+                                            <option value="有害垃圾">有害垃圾</option>
+                                            {% endif %}
+                                            {% if popular_science.classification != '厨余垃圾' %}
+                                            <option value="厨余垃圾">厨余垃圾</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
+							</fieldset>
+
+							<fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">垃圾科普</label>
+                                    <div class="col-sm-6">
+
+                                        <textarea cols="50" rows="8" name="introduction" id="kepu" class="form-control datepicker" autocomplete="off" >{{ popular_science.introduction }}</textarea>
+                                    </div>
+                                </div>
+							</fieldset>
+						</div>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> </label>
+                                <div class="col-sm-6" style="text-align: center;">
+                                    <input type="submit" name="submit" class="btn btn-info btn-fill" value="添加">
+                                </div>
+                            </div>
+                        </fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

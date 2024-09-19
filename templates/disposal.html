@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}
+    <a class="navbar-brand" href="#"> 垃圾投放 </a>
+{% endblock %}
+{% block content %}
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<form id="allInputsFormValidation" class="form-horizontal"  method="post"  >
+						<div class="content">
+							<h4 class="title">垃圾投放</h4>
+
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">识别结果</label>
+                                    <div class="col-sm-6">
+
+                                        <img src="{{ image_path }}"  style="height: 400px;width: 550px;margin: 0 auto;display: block; " id="img_loaded01"/>
+                                    </div>
+                                </div>
+							</fieldset>
+
+
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">社区</label>
+                                    <div class="col-sm-6">
+                                        <select id="shelfSelect" class="form-control" name="community" >
+                                            {% for community in communities %}
+                                            <option value="{{ community.id }}">{{ community.community }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+							</fieldset>
+                        {% for key, value in cls_4_counts.items() %}
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" >{{ key }}</label>
+                                        <div class="col-sm-6"style="margin-top: 10px">
+                                            {{ value }}
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            {% endfor %}
+                        </div>
+                        {% if communities|length >= 1 %}
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> </label>
+                                <div class="col-sm-6" style="text-align: center;">
+                                    <input type="submit" name="submit" class="btn btn-info btn-fill" value="投放">
+                                </div>
+                            </div>
+                        </fieldset>
+                        {% else %}
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> </label>
+                                <div class="col-sm-6" style="text-align: center;">
+                                    暂无社区请联系管理员添加社区
+                                </div>
+                            </div>
+                        </fieldset>
+                        {% endif %}
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}
+    <a class="navbar-brand" href="#"> {{ popular_science.name }} 的科普介绍 </a>
+{% endblock %}
+{% block content %}
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<form id="allInputsFormValidation" class="form-horizontal"  method="post" >
+						<div class="content">
+							<h4 class="title"> {{ popular_science.name }} 的科普介绍</h4>
+
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label" >垃圾名称</label>
+                                    <div class="col-sm-6"style="margin-top: 10px">
+
+                                        {{ popular_science.name }}
+                                    </div>
+                                </div>
+							</fieldset>
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label" >垃圾类别</label>
+                                    <div class="col-sm-6"style="margin-top: 10px">
+
+                                        {{ popular_science.classification }}
+                                    </div>
+                                </div>
+							</fieldset>
+							<fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label" >垃圾科普</label>
+                                    <div class="col-sm-6"style="margin-top: 10px">
+                                       {{ popular_science.introduction }}
+                                    </div>
+                                </div>
+							</fieldset>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

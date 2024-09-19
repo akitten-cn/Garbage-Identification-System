@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}
+    <a class="navbar-brand" href="#"> 添加社区垃圾容量 </a>
+{% endblock %}
+{% block content %}
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<form id="allInputsFormValidation" class="form-horizontal"  method="post" >
+						<div class="content">
+							<h4 class="title">添加社区垃圾容量</h4>
+
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">社区名称</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="weight_name" type="text" name="community"
+                                               required="required" aria-required="true" autocomplete="off" >
+                                    </div>
+                                </div>
+							</fieldset>
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">可回收垃圾数量</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="weight_name" type="number" name="recyclable_trash"
+                                               required="required" aria-required="true" autocomplete="off" value=1000 >
+                                    </div>
+                                </div>
+							</fieldset>
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">不可回收垃圾数量</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="weight_name" type="number" name="non_recyclable_trash"
+                                               required="required" aria-required="true" autocomplete="off" value=1000>
+                                    </div>
+                                </div>
+							</fieldset>
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">有害垃圾数量</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="weight_name" type="number" name="hazardous_trash"
+                                               required="required" aria-required="true" autocomplete="off" value=1000>
+                                    </div>
+                                </div>
+							</fieldset>
+                            <fieldset>
+								<div class="form-group">
+                                    <label class="col-sm-2 control-label">厨余垃圾数量</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="weight_name" type="number" name="kitchen_trash"
+                                               required="required" aria-required="true" autocomplete="off" value=1000>
+                                    </div>
+                                </div>
+							</fieldset>
+
+
+						</div>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> </label>
+                                <div class="col-sm-6" style="text-align: center;">
+                                    <input type="submit" name="submit" class="btn btn-info btn-fill" value="添加">
+                                </div>
+                            </div>
+                        </fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

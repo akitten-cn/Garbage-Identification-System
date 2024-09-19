@@ -1,0 +1,42 @@
+{%  extends 'base.html' %}
+{% block body %}{% endblock %}
+{% block login %}
+<div class="wrapper wrapper-full-page">
+        <div class="full-page login-page"  data-color="blue">
+            <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+
+                            <form method="post">
+                                <div class="card card-login card-hidden">
+                                    <div class="header text-center">
+                                        <h3 class="title">登录</h3>
+                                    </div>
+                                    <div class="content">
+                                        <div class="form-group">
+                                            <label>账号</label>
+                                            <input type="text" name="username" class="form-control input-no-border" autocomplete="off" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>密码</label>
+                                            <input type="password" name="password" class="form-control input-no-border" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <input type="submit" name="submit" class="btn btn-rose btn-wd btn-lg" value="登录">
+                                        	<a href="{{ url_for('logging') }}">
+                            					<i class="ti-id-badge">&#9998</i> 注册
+                        					</a>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock %}

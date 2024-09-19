@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}
+    <a class="navbar-brand" href="#"> 社区可投放剩余量 </a>
+{% endblock %}
+{% block write %}
+    {% if current_user.has_role('Admin') or current_user.has_role('Root') %}
+    <li>
+    <a  method="post" href="{{ url_for('community_add') }}" class="btn btn-simple btn-danger btn-icon remove" data-toggle="dropdown">
+        添加社区
+    </a>
+    </li>
+    {% endif %}
+{% endblock %}
+{% block content %}
+{# 使用 length 过滤器获取 staffs 变量的长度 #}
+
+    {% if current_user.has_role('Admin') or current_user.has_role('Root') %}
+    <div class="content">
+            <h4 class="title">社区可投放剩余量</h4>
+            <div class="material-datatables">
+                <table id="datatables" class="table table-striped table-no-bordered table-hover"
+                       style="width:100%;cellspacing:0">
+                    <thead>
+                    <tr>
+                        <th>社区</th>
+                        <th>可回收剩余数量</th>
+                        <th>不可回收剩余数量</th>
+                        <th>有害垃圾剩余数量</th>
+                        <th>厨余垃圾剩余数量</th>
+                        <th class="disabled-sorting">操作</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for community in communities %}
+                            <tr>
+                                <td>{{ community.community }}</td>
+                                <td>{{ community.recyclable_trash }}/{{ community.recyclable_trash_original }}</td>
+                                <td>{{ community.non_recyclable_trash }}/{{ community.non_recyclable_trash_original }}</td>
+                                <td>{{ community.hazardous_trash }}/{{ community.hazardous_trash_original }}</td>
+                                <td>{{ community.kitchen_trash }}/{{ community.kitchen_trash_original }}</td>
+                                <td>
+
+                                    <form  method="post" action="{{ url_for('community_recover',id=community.id) }}">
+                                        <a href="{{ url_for('community_change',id=community.id) }}"
+                                       class="btn btn-simple btn-warning btn-icon edit">修改</a>
+                                        <input name="delete" type="submit" value="回收" onclick="return confirm('确认已完成回收？')" class="btn btn-simple btn-danger btn-icon remove">
+                                    </form>
+                                </td>
+
+                            </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </div>
+    {% elif current_user.has_role('User') %}
+    <div class="content">
+            <h4 class="title">社区可投放剩余量</h4>
+            <div class="material-datatables">
+                <table id="datatables" class="table table-striped table-no-bordered table-hover"
+                       style="width:100%;cellspacing:0">
+                    <thead>
+                    <tr>
+                        <th>社区</th>
+                        <th>可回收剩余数量</th>
+                        <th>不可回收剩余数量</th>
+                        <th>有害垃圾剩余数量</th>
+                        <th>厨余垃圾剩余数量</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for community in communities %}
+                            <tr>
+                                <td>{{ community.community }}</td>
+                                <td>{{ community.recyclable_trash }}/{{ community.recyclable_trash_original }}</td>
+                                <td>{{ community.non_recyclable_trash }}/{{ community.non_recyclable_trash_original }}</td>
+                                <td>{{ community.hazardous_trash }}/{{ community.hazardous_trash_original }}</td>
+                                <td>{{ community.kitchen_trash }}/{{ community.kitchen_trash_original }}</td>
+                            </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </div>
+    {% endif %}
+{% endblock %}
